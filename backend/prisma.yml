@@ -1,2 +1,8 @@
-endpoint: https://eu1.prisma.sh/hernan-pereyra-9e3b34/sick-fit/dev
+endpoint: ${env:PRISMA_ENDPOINT}
+#endpoint: https://eu1.prisma.sh/hernan-pereyra-9e3b34/sick-fit/dev
 datamodel: datamodel.prisma
+secret: ${env:PRISMA_SECRET}
+#secret: elsecretoprism4
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma
