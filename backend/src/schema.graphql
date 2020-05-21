@@ -1,10 +1,18 @@
 # edit this file for yoga as well like edit datamodel.prisma for prisma
+# this file is a public facing api where react app interface with
+
 # import * from './generated/prisma.graphql'
 type Mutation {
-  createItem(title: String, description: String, price: Int, image: String, largeImage: String): Item!
+  createItem(
+    title: String
+    description: String
+    price: Int
+    image: String
+    largeImage: String
+  ): Item!
 }
 
-type Query{
+type Query {
   items: [Item]!
 }
 
