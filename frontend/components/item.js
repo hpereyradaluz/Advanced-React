@@ -13,9 +13,12 @@ class Item extends Component {
 
   render() {
     const { item } = this.props;
-    //    console.log(JSON.stringify(item));
+    //console.log(JSON.stringify(item));
     return (
       <ItemStyles>
+        {item.image && <img src={item.image} alt={item.title} />}
+
+        {/* ortra forma{item.image ? <img/>: null} */}
         <Title>
           <Link
             href={{
@@ -37,6 +40,8 @@ class Item extends Component {
           >
             <a>Edit 📝</a>
           </Link>
+          <button>Add To Cart</button>
+          <button>Delete </button>
         </div>
       </ItemStyles>
     );
