@@ -81,8 +81,8 @@ class CreateItem extends Component {
           >
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
-              <label htmlFor="file">
-                Title
+              <label htmlFor="title">
+                Image
                 <input
                   type="file"
                   id="file"
@@ -134,7 +134,7 @@ class CreateItem extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <button type="submit">Submit</button>
+              <button type="submit">Subm{loading ? "iting" : "it"}</button>
             </fieldset>
           </Form>
         )}
