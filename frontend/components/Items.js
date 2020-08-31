@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
+// default export not require {}
 import Item from "./Item";
 import Pagination from "../components/Pagination";
+// {} for name export
+import { perPage } from "../config";
 
 const ALL_ITEMS_QUERY = gql`
-  query ALL_ITEMS_QUERY {
-    items {
+  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}){
+    items(first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       title
       description
@@ -35,7 +38,18 @@ class Items extends Component {
     return (
       <Center>
         <Pagination page={this.props.page} />
-        <Query query={ALL_ITEMS_QUERY}>
+        <Query
+          query={ALL_ITEMS_QUERY}
+          // fetchPolicy="network-only"
+          // ⬆️⬆️⬆️⬆️⬆️ to realod fetching every sigle time, so if i add an item
+          // i got automatic updates for every page, but i don want this solution
+          // becaus i loose the benefits of pre-cache and goes slowly
+
+          variables={{
+            skip: this.props.page * perPage - perPage,
+            first: perPage,
+          }}
+        >
           {({ data, error, loading }) => {
             if (loading) return <p> Loading ...</p>;
             if (error) return <p> Error: {error.message} </p>;
@@ -56,4 +70,3 @@ class Items extends Component {
 
 export default Items;
 export { ALL_ITEMS_QUERY };
-
