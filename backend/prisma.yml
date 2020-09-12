@@ -3,6 +3,12 @@ endpoint: https://eu1.prisma.sh/hernan-pereyra-9e3b34/sick-fit/dev
 datamodel: datamodel.prisma
 #secret: ${env:PRISMA_SECRET}
 secret: elsecretoprism4
+generate:
+  - generator: graphql-schema
+    output: ./generated/prisma.graphql
 hooks:
   post-deploy:
+    #- prisma generate
     - graphql get-schema -p prisma
+# https://v1.prisma.io/docs/1.34/prisma-cli-and-configuration/prisma-yml-5cy7/
+# https://openbase.io/js/graphql-cli-prepare/documentation
